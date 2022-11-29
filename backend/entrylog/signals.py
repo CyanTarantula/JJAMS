@@ -1,4 +1,3 @@
-from threading import Thread
 from entrylog import models
 from django.contrib.auth.hashers import make_password
 
