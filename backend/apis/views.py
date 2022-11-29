@@ -37,10 +37,14 @@ class HostelViewSet(viewsets.ModelViewSet):
 class EntryLogViewSet(viewsets.ModelViewSet):
     queryset = EntryLog.objects.all()
     serializer_class = EntryLogSerializers
+    filterset_fields = ['roll_no']
+    permission_classes = [AllowAny]
 
 class GuardDetailViewSet(viewsets.ModelViewSet):
     queryset = Guard_Detail.objects.all()
     serializer_class = GuardDetailSerializers
+    filterset_fields = ['Guard_Id']
+    permission_classes = [AllowAny]
 
 class DefaulterViewSet(viewsets.ModelViewSet):
     queryset = Defaulters.objects.all()
@@ -53,11 +57,13 @@ class ComplaintViewSet(viewsets.ModelViewSet):
     serializer_class = ComplaintSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['roll_no']
+    permission_classes = [AllowAny]
 
 class LeaveApplicationViewSet(viewsets.ModelViewSet):
     queryset = leave_application_db.objects.all()
     serializer_class = LeaveApplicationSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['roll_no']
+    permission_classes = [AllowAny]
 
 # Create your views here.

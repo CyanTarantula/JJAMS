@@ -23,6 +23,9 @@ def application_trigger(sender,instance,**kwargs):
             print(f"Leave Application for {instance.roll_no.student_name} accepted.")
         else:
             print(f"Leave Application for {instance.roll_no.student_name} denied.")
+        
+        if instance.start_date>instance.end_date:
+            raise ValueError("Start date can't be greater than end date.")
 
                 
 def Mailer(instance):
