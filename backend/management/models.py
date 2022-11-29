@@ -7,7 +7,7 @@ from django.conf import settings
 
 #to be hidden from admin page even.
 class password_db(models.Model):
-	roll_no = models.TextField(primary_key=True,null=False)
+	roll_no = models.OneToOneField("student_db", primary_key=True, on_delete=models.CASCADE ,null=False)
 	password=models.CharField(null=False,max_length=160)
 
 class student_db(models.Model):
@@ -52,6 +52,10 @@ class hostel_db(models.Model):
 		return str(self.hostel_name)
 	class Meta:
 		verbose_name="Hostel Detail"
+
+	@property
+	def empty_rooms(self):
+		return self.no_of_rooms - student_db.objects.filter(hostel_name=self.hostel_name).count()
 		
 class warden_db(models.Model):
 	#primary_key.
