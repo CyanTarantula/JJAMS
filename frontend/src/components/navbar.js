@@ -11,9 +11,8 @@ const optionsMap = {
         {name: "Logout", link: "/logout"}
     ],
     "Home": [
-        {name: "Dummy1", link: "/dummy1"},
-        {name: "Dummy2", link: "/dummy2"},
-        {name: "Dummy3", link: "/dummy3"}
+        {name: "Leave Application Form", link: "/leave-application-form"},
+        {name: "Complaint Form", link: "/complaint-form"}
     ]
 }
 

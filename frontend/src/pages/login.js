@@ -1,17 +1,23 @@
-import { useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './login.css'
 
+import { userContext } from '../App';
 import { backendUrl } from '../backendUrl';
 
 function Login() {
+    const loggedIn = localStorage.getItem("JJAMS_loggedIn");
+    const rollNo = localStorage.getItem("JJAMS_roll_no");
+
+    const [loginType, setLoginType] = useState("student");
+
     let navigate = useNavigate();
 
     useEffect(() => {
-        if (localStorage.getItem('JJAMS_loggedIn') === 'true') {
+        if (loggedIn === 'true') {
             // window.location.href = '/home';
             navigate('/');
             // toast('You are already logged in!');
@@ -38,7 +44,14 @@ function Login() {
             headers: headers,
         };
 
-        fetch(`${backendUrl}/api/login/password/?roll_no=${data.roll_no}`, requestOptions)
+        var requestURL = "";
+        if (loginType === "student") {
+            requestURL = `${backendUrl}/api/login/password/?roll_no=${data.roll_no}`;
+        } else {
+            requestURL = `${backendUrl}/api/guards/?Guard_ID=${data.roll_no}`;
+        }
+
+        fetch(requestURL, requestOptions)
             .then((response) => {
                 console.log("Response: ", response);
                 if (response.status === 200) {
@@ -58,7 +71,12 @@ function Login() {
                         localStorage.setItem('JJAMS_roll_no', data.roll_no);
                         localStorage.setItem('JJAMS_loggedIn', 'true');
                         console.log(localStorage.getItem('JJAMS_loggedIn'));
-                        window.location.href = "/";
+                        if (loginType === "student") {
+                            window.location.href = "/";
+                        }
+                        else {
+                            window.location.href = "/log-entry";
+                        }
                     }
                     else {
                         toast("Invalid credentials");
@@ -79,8 +97,29 @@ function Login() {
                 <div className="login-section-title">
                     Login
                 </div>
+                <div className="login-type-radio" onChange={() => {
+                    if (loginType === "student") {
+                        setLoginType("teacher");
+                    }
+                    else {
+                        setLoginType("student");
+                    }
+                }}>
+                    <div className='login-type-radio-item'>
+                        <input type="radio" id="login-type-student" name="login-type" value="student" defaultChecked />
+                        <label htmlFor="login-type-student">Student</label>
+                    </div>
+                    <div className='login-type-radio-item'>
+                        <input type="radio" id="login-type-guard" name="login-type" value="guard" />
+                        <label htmlFor="login-type-guard">Guard</label>
+                    </div>
+                </div>
                 <form className="login-form" onSubmit={handleSubmit}>
-                    <label htmlFor="roll_no">Roll No:</label>
+                    <label htmlFor="roll_no">
+                        {
+                            loginType === "student" ? "Roll No." : "Guard ID"
+                        }
+                    </label>
                     <input type="text" id="login-roll_no" name="roll_no" />
                     <label htmlFor="password">Password:</label>
                     <input type="password" id="login-password" name="password" />

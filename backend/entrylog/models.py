@@ -28,7 +28,7 @@ class Guard_Detail(models.Model):
 	Guard_Id = models.AutoField(primary_key=True,null=False)
 	Guard_Name = models.CharField(null=False,max_length = 80)
 	Contact_No = PhoneNumberField(null=False)
-	Password = models.CharField(null=False,max_length=160)
+	password = models.CharField(null=False,max_length=160)
 	
 	def __str__(self):
 		return str(self.Guard_Id)

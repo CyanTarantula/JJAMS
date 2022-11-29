@@ -9,13 +9,13 @@ import { userContext } from '../App';
 import { backendUrl } from '../backendUrl';
 
 function ComplaintForm() {
+    const loggedIn = localStorage.getItem("JJAMS_loggedIn");
+    const rollNo = localStorage.getItem("JJAMS_roll_no");
+
     const navigate = useNavigate();
 
-    const loggedIn = useContext(userContext).loggedIn;
-    const rollNo = useContext(userContext).rollNo;
-
     useEffect(() => {
-        if (!loggedIn) {
+        if (loggedIn !== 'true') {
             navigate('/login');
         }
     }, [])
@@ -24,8 +24,10 @@ function ComplaintForm() {
         e.preventDefault();
         const data = {
             roll_no: rollNo,
-            complaint_title: e.target.complaint_title.value,
-            complaint_description: e.target.complaint_description.value,
+            complaint_title: e.target.title.value,
+            complaint_type: e.target.type.value,
+            complaint_date: e.target.date.value,
+            complaint_description: e.target.description.value,
         }
 
         console.log(JSON.stringify(data))
@@ -43,7 +45,7 @@ function ComplaintForm() {
             body: JSON.stringify(data)
         };
 
-        fetch(`${backendUrl}/api/complaint/`, requestOptions)
+        fetch(`${backendUrl}/api/complaints/?roll_no=${rollNo}`, requestOptions)
             .then((response) => {
                 console.log("Response: ", response);
                 if (response.status !== 201) {
@@ -72,10 +74,10 @@ function ComplaintForm() {
                     <input type="date" id="complaint-date" name="date" required />
                     
                     <div className="complaint-type-dropdown">
-                        <label htmlFor="type" className='signup-type-dropdown-label'>Programme:</label>
+                        <label htmlFor="type" className='complaint-type-dropdown-label'>Complaint Type:</label>
                         <select name="type" id="complaint-type" required>
-                            <option className='complaint-type-option' value="Room Related">Room Related</option>
-                            <option className='complaint-type-option' value="Facilities Related">Facilities Related</option>
+                            <option className='complaint-type-option' value="Room">Room Related</option>
+                            <option className='complaint-type-option' value="Facility">Facilities Related</option>
                             <option className='complaint-type-option' value="Other">Other</option>
                         </select>
                     </div>
@@ -85,6 +87,8 @@ function ComplaintForm() {
 
                     <label htmlFor="description">Description:</label>
                     <textarea id="complaint-description" name="description" rows={4} />
+
+                    <input type="submit" id="complaint-submit" />
                 </form>
             </div>
             <ToastContainer />

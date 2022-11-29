@@ -1,4 +1,4 @@
-.complaint-form-container {
+.leave-application-form-container {
     box-sizing: border-box;
     width: 100vw;
     min-height: 90vh;
@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-.complaint-form-section {
+.leave-application-form-section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,25 +17,25 @@
     padding: 2vh 1vw;
 }
 
-.complaint-form-title {
+.leave-application-form-title {
     text-align: center;
     font-size: 3vmin;
     font-weight: 600;
     padding-bottom: 2vh;
 }
 
-.complaint-form {
+.leave-application-form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.complaint-form > label, .complaint-form > div {
+.leave-application-form > label, .leave-application-form > div {
     padding-top: 2vh;
     padding-bottom: 5px;
 }
 
-.complaint-form input {
+.leave-application-form input {
     height: 5vh;
     box-sizing: border-box;
     width: 100%;
@@ -45,7 +45,7 @@
     background-color: #DFE0DF;
 }
 
-.complaint-form textarea {
+.leave-application-form textarea {
     resize: none;
     min-width: 50vw;
     box-sizing: border-box;
@@ -56,29 +56,7 @@
     background-color: #DFE0DF;
 }
 
-.complaint-type-dropdown {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-.complaint-type-dropdown-label {
-    width: 40%;
-    text-align: left;
-}
-
-#complaint-type {
-    height: 5vh;
-    box-sizing: border-box;
-    width: 100%;
-    border: 2px solid #402E32;
-    border-radius: 5px;
-    color: #005a5e;
-    background-color: #DFE0DF;
-}
-
-#complaint-submit {
+#leave-application-submit {
     width: 30%;
     margin-left: auto;
     margin-top: 2vh;
@@ -91,7 +69,7 @@
     padding: 2px;
 }
 
-#complaint-submit:hover {
+#leave-application-submit:hover {
     cursor: pointer;
     background-color: #ff9f6e;
 }

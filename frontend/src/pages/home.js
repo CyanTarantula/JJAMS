@@ -9,15 +9,15 @@ import { userContext } from '../App';
 import { backendUrl } from '../backendUrl';
 
 function Home() {
-    const loggedIn = useContext(userContext).loggedIn;
-    const rollNo = useContext(userContext).rollNo;
+    const loggedIn = localStorage.getItem("JJAMS_loggedIn");
+    const rollNo = localStorage.getItem("JJAMS_roll_no");
 
     const [userData, setUserData] = useState({});
 
     let navigate = useNavigate();
 
     useEffect(() => {
-        if (!loggedIn) {
+        if (loggedIn !== 'true') {
             navigate('/login');
         }
         else {

@@ -31,6 +31,13 @@
     padding-bottom: 8vh;
 }
 
+.login-type-radio {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .login-form {
     width: 100%;
     display: flex;
@@ -52,6 +59,10 @@
     color: #005a5e;
     background-color: #DFE0DF;
 }
+
+/* #login-type-student, #login-type-guard {
+    height: 2vh;
+} */
 
 #login-submit-btn {
     width: 30%;

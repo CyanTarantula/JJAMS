@@ -10,11 +10,14 @@ import Signup from "./pages/signup";
 import Home from "./pages/home";
 
 import ComplaintForm from "./pages/complaintForm";
+import LeaveApplicationForm from "./pages/leaveApplicationForm";
+
+import LogEntry from "./pages/logEntry";
 
 export const userContext = createContext();
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState("");
   const [rollNo, setRollNo] = useState("");
 
   useEffect(() => {
@@ -36,7 +39,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
 
+            <Route path="/leave-application-form" element={<LeaveApplicationForm />} />
             <Route path="/complaint-form" element={<ComplaintForm />} />
+
+            <Route path="/log-entry" element={<LogEntry />} />
           </Routes>
         </div>
       </Router>
