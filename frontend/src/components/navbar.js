@@ -71,7 +71,9 @@ function Navbar() {
                         handleMouseLeave(e);
                     }}
                 >
-                    <img src={logo} />
+                    <Link to="/home">
+                        <img src={logo} />
+                    </Link>
                     {/* <div className="navbar-logo-name-text">
                         JJAMS
                     </div> */}
