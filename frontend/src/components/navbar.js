@@ -8,8 +8,6 @@ import logo from "../assets/JJAMS-logos/JJAMS-logos.jpeg";
 const optionsMap = {
     "Hide": [],
     "Login": [
-        {name: "Sign Up", link: "/signup"},
-        {name: "Forgot Password", link: "/forgot-password"},
         {name: "Logout", link: "/logout"}
     ],
     "Home": [
@@ -23,17 +21,33 @@ const NavbarDropdown = forwardRef((props, ref) => {
     return (
         <div className="navbar-dropdown" ref={ref} onMouseLeave={()=>{props.onMouseLeave()}}>
             {
-                props.menuOptions.map((option, index) => (
-                    <Link to={option.link} key={index} className="navbar-dropdown-option">
-                        {option.name}
-                    </Link>
-                ))
+                props.menuOptions.map((option, index) => {
+                    if (option.name === "Logout") {
+                        return (
+                            <Link to={"/login"} key={index} className="navbar-dropdown-option"
+                                onClick={() => {
+                                    localStorage.removeItem("JJAMS_roll_no");
+                                    localStorage.removeItem("JJAMS_loggedIn");
+                                }}
+                            >
+                                {option.name}
+                            </Link>
+                        )
+                    }
+                    return (
+                        <Link to={option.link} key={index} className="navbar-dropdown-option">
+                            {option.name}
+                        </Link>
+                    )
+                })
             }
         </div>
     )
 });
 
 function Navbar() {
+    const loggedIn = localStorage.getItem("JJAMS_loggedIn") === "true";
+
     const dropDownRef = useRef(null);
 
     const [menuOptions,  setMenuOptions] = useState([]);
@@ -71,34 +85,44 @@ function Navbar() {
                         handleMouseLeave(e);
                     }}
                 >
-                    <Link to="/home">
-                        <img src={logo} />
-                    </Link>
-                    {/* <div className="navbar-logo-name-text">
-                        JJAMS
-                    </div> */}
+                    {
+                        loggedIn ? (
+                            <Link to="/">
+                                <img src={logo} />
+                            </Link>
+                        ) : (
+                            <img src={logo} />
+                        )
+                    }
                 </div>
-                <Link 
-                    to="/"
-                    onMouseOver={() => {
-                        updateMenuOptions("Login");
-                    }}
-                    onMouseLeave={(e) => {
-                        handleMouseLeave(e);
-                    }}
-                >
-                    <div className="navbar-login">
-                        LOGIN
-                    </div>
-                </Link>
+                {
+                    loggedIn && (
+                        <Link 
+                            to="/"
+                            onMouseOver={() => {
+                                updateMenuOptions("Login");
+                            }}
+                            onMouseLeave={(e) => {
+                                handleMouseLeave(e);
+                            }}
+                        >
+                            <div className="navbar-profile">
+                                Profile
+                            </div>
+                        </Link>
+                    )
+                }
             </nav>
-            <NavbarDropdown 
-                ref={dropDownRef}
-                menuOptions={menuOptions} 
-                onMouseLeave={(e) => {
-                    updateMenuOptions("Hide");
-                }}
-            />
+            {
+                loggedIn &&
+                <NavbarDropdown 
+                    ref={dropDownRef}
+                    menuOptions={menuOptions} 
+                    onMouseLeave={(e) => {
+                        updateMenuOptions("Hide");
+                    }}
+                />
+            }
         </div>
     )
 }

@@ -39,7 +39,7 @@
     margin: none;
 }
 
-.navbar-login {
+.navbar-profile {
     height: min-content;
     font-weight: 500;
     color: #005a5e;
@@ -50,7 +50,7 @@
     transition: transform 0.1s ease-in-out;
 }
 
-.navbar-login:hover {
+.navbar-profile:hover {
     cursor: pointer;
     background-color: #005a5e;
     color: #ffb18a;

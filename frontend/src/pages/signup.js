@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './signup.css'
 
@@ -9,7 +11,8 @@ function Signup() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (e.target.password.value !== e.target.confirm_password.value) {
-            alert("Passwords do not match");
+            // alert("Passwords do not match");
+            toast("Passwords do not match");
         }
         else {
             const data = {
@@ -22,38 +25,67 @@ function Signup() {
                 email_id: e.target.email_id.value,
                 guardian_contact: e.target.guardian_contact.value,
                 age: e.target.age.value,
-                hostel_name: e.target.hostel_name.value,
+                hostel_name: e.target.hostel.value,
                 // photo: e.target.photo.value,
                 permanent_addr: e.target.permanent_addr.value,
                 room_no: e.target.room_no.value,
-                password: e.target.password.value,
             };
+            console.log(data);
+
+            const data2 = {
+                roll_no: e.target.roll_no.value,
+                password: e.target.password.value,
+            }
+
+            let headers = new Headers();
+
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
+            // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+            headers.append('Origin','http://localhost:3000');
+
             const requestOptions = {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: headers,
                 body: JSON.stringify(data),
             };
 
+            const requestOptions2 = {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(data2),
+            }
+
             fetch(`${backendUrl}/api/students/`, requestOptions)
                 .then((response) => {
-                    console.log(response);
-                    if (response.status === 201) {
-                        //sendSuccessMail(data.email);
-                        window.location.href = "/login";
+                    console.log("Response: ", response);
+                    if (response.status === 201) {                        
+                        fetch(`${backendUrl}/api/login/password/`, requestOptions2)
+                            .then((response2) => {
+                                console.log("Response2: ", response2);
+                                if (response2.status === 201) {
+                                    window.location.href = "/";
+                                }
+                                else {
+                                    // alert("Error signing up");
+                                    toast("Error signing up");
+                                }
+                            })
                     } else if (response.status === 409) {
-                        alert("user already exists");
-                        window.location.href = "/login";
+                        toast("User already exists");
+                        window.location.href = "/";
                     } else {
-                        alert("Invalid credentials");
-                        window.location.href = "/signup";
+                        // alert("Invalid credentials");
+                        toast("Invalid credentials");
+                        // window.location.href = "/signup";
                     }
                     return response.json();
                 })
                 .then((data) => {
-                    console.log(data);
+                    console.log("Data: ", data);
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log("Error: ", error);
                 });
         }
     };
@@ -93,9 +125,6 @@ function Signup() {
                     <input type="text" id="signup-guardian_contact" name="guardian_contact" required />
                     <label htmlFor="age">Age:</label>
                     <input type="text" id="signup-age" name="age" required />
-
-                    <label htmlFor="hostel_name">Hostel Name:</label>
-                    <input type="text" id="signup-hostel_name" name="hostel_name" required />
 
                     <div className="signup-hostel-dropdown">
                         <label htmlFor="hostel" className='signup-hostel-dropdown-label'>Hostel Name:</label>
@@ -160,14 +189,13 @@ function Signup() {
                         }}
                     />
 
-                    <Link to="/" id="signup-submit-btn" type="submit" value="Submit">
-                        Submit
-                    </Link>
+                    <input type="Submit" id="signup-submit-btn" />
                 </form>
                 <div className="signup-login">
-                    Already have an account? <Link to="/">Login</Link>
+                    Already have an account? <Link to="/login">Login</Link>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     )
 }
