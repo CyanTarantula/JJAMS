@@ -35,6 +35,8 @@ class student_db(models.Model):
 		return str(self.roll_no)
 	class Meta:
 		verbose_name="Student Detail"
+
+# post_save.connect(Save_Password, sender=student_db)
 		
 class hostel_db(models.Model):
 	# Primary key

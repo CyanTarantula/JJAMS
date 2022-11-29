@@ -20,6 +20,7 @@ class PasswordViewSet(viewsets.ModelViewSet):
     serializer_class = PasswordSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['roll_no']
+    permission_classes = [AllowAny]
 
 class WardenViewSet(viewsets.ModelViewSet):
     queryset = warden_db.objects.all()
