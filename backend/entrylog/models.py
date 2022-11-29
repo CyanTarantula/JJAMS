@@ -36,8 +36,6 @@ class Guard_Detail(models.Model):
 	class Meta:
 		verbose_name = "Guard Details"
 		verbose_name_plural = "Guards Details"
-	
-pre_save.connect(Guard_Password_Manager,sender=Guard_Detail)
 		
 class Defaulters(models.Model):
 	entry_id = models.OneToOneField(EntryLog, on_delete=models.CASCADE, primary_key=True)

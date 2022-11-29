@@ -12,10 +12,11 @@ class complaints_db(models.Model):
     ]
 
     complaint_id = models.AutoField(primary_key=True,)
-    roll_no = models.ForeignKey(student_db,on_delete=models.CASCADE)
+    roll_no = models.ForeignKey(student_db,on_delete=models.CASCADE, null=False, blank=False)
     complaint_title = models.CharField(max_length = 50,null = False)
     complaint_type = models.CharField(null = False, choices=type_choices, max_length=50)
-    complaint_date = models.DateField()
+    complaint_date = models.DateField(null=False)
+    complaint_description = models.TextField(null=False, blank=False)
     complaint_image = models.ImageField(null = True)
     complaint_solved = models.BooleanField(default=False, null=False)
 
@@ -32,15 +33,15 @@ class leave_application_db(models.Model):
 	reason = models.CharField(max_length=251,null = False)
 	start_date = models.DateField() # end date > start date
 	end_date = models.DateField()
-	accepted = models.BooleanField(default = None, null = True)
+	accepted = models.BooleanField(null = True, blank=True)
 	
 	def __unicode__(self):
-		return str(self.reg_no)
+		return str(self.roll_no)
 	def __str__(self):
-		return str(self.reg_no)
+		return str(self.roll_no)
 
 	class Meta:
 		verbose_name = "Application"
 		verbose_name_plural = "Applications Managment"
 
-post_save.connect(application_trigger,sender=leave_application_db)
+pre_save.connect(application_trigger,sender=leave_application_db)
