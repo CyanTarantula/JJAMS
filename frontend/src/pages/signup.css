@@ -1,0 +1,127 @@
+.signup {
+    box-sizing: border-box;
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    padding: 4vh 2vw;
+    overflow-y: auto;
+}
+
+.signup-section {
+    box-sizing: border-box;
+    /* min-height: 60vh; */
+    width: 50%;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1vh 5vw;
+    border: 4px solid #402E32;
+    border-radius: 8px;
+    background-color: #bca79d3e;
+}
+
+.signup-section-title {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    font-size: 3vmin;
+    font-weight: 600;
+    padding-bottom: 8vh;
+}
+
+.signup-form {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.signup-form > label, .signup-form > div {
+    padding-top: 2vh;
+    padding-bottom: 5px;
+}
+
+.signup-form input {
+    height: 5vh;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid #402E32;
+    border-radius: 5px;
+    color: #005a5e;
+    background-color: #DFE0DF;
+}
+
+.signup-programme-dropdown {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.signup-programme-dropdown-label {
+    width: 40%;
+    text-align: left;
+}
+
+#signup-programme {
+    height: 5vh;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid #402E32;
+    border-radius: 5px;
+    color: #005a5e;
+    background-color: #DFE0DF;
+}
+
+.signup-hostel-dropdown {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.signup-hostel-dropdown-label {
+    width: 40%;
+    text-align: left;
+}
+
+#signup-hostel {
+    height: 5vh;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid #402E32;
+    border-radius: 5px;
+    color: #005a5e;
+    background-color: #DFE0DF;
+}
+
+#signup-photo {
+    height: auto;
+    width: auto;
+    border: none;
+}
+
+#signup-submit-btn {
+    width: 30%;
+    margin-left: auto;
+    margin-top: 5px;
+    font-weight: 700;
+    color: #005a5e;
+    background-color: #ffb18a;
+    box-sizing: border-box;
+    border: 2px solid #005a5e;
+    border-radius: 2px;
+    padding: 2px;
+}
+
+#signup-submit-btn:hover {
+    cursor: pointer;
+    background-color: #ffb18ad3;
+}

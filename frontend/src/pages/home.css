@@ -1,8 +1,10 @@
 .home {
+    height: 90vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
 }
 
 .home-title {
@@ -31,4 +33,61 @@
     justify-content: flex-start;
     flex-direction: column;
     align-items: flex-start;
+    padding-bottom: 8vh;
+}
+
+.idcard-container {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.idcard {
+    box-sizing: border-box;
+    padding: none;
+    margin: none;
+    width: 60%;
+    outline: 3px solid #402E32;
+    border-radius: 8px;
+    background-color: #bca79d72;
+}
+
+.idcard-title {
+    width: 100%;
+    font-size: 4vmin;
+    background-color: green;
+}
+
+.idcard-content {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+.idcard-content-left {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-size: 3vmin;
+}
+
+.idcard-content-right {
+    width: 40%;
+}
+
+.idcard-content-photo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.idcard-footer {
+    background-color: lightgreen;
 }
